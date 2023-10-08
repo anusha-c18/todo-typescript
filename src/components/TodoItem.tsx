@@ -1,10 +1,12 @@
+import useOperations from "../hooks/useOperations";
 import "./TodoItem.css";
 import { motion } from "framer-motion";
 
 const TodoItem: React.FC<{
+  id: string;
   text: string;
-  removeTodo: () => void;
-}> = (props) => {
+}> = ({ text, id }) => {
+  const { removeTodoHandler } = useOperations();
   return (
     <motion.li
       layout
@@ -13,9 +15,9 @@ const TodoItem: React.FC<{
       exit={{ scale: 0.8, opacity: 0 }}
       transition={{ type: "spring" }}
       className="item"
-      onClick={props.removeTodo}
+      onClick={() => removeTodoHandler(id)}
     >
-      {props.text}
+      {text}
     </motion.li>
   );
 };
