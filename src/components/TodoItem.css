@@ -3,5 +3,12 @@
   padding: 1rem;
   background-color: #f7f5ef;
   width: 50%;
+  border-radius: 10px;
   margin: 1rem auto;
+  cursor: pointer;
+}
+
+.item:hover {
+  background-color: #ffbfbf;
+  transition: background-color linear 0.3s;
 }

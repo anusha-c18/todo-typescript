@@ -1,18 +1,19 @@
 import "./TodoItem.css";
 import { motion } from "framer-motion";
 
-const TodoItem: React.FC<{ text: string }> = (props) => {
+const TodoItem: React.FC<{
+  text: string;
+  removeTodo: () => void;
+}> = (props) => {
   return (
     <motion.li
-      initial={{ y: -10 }}
-      animate={{ y: 0, scale: 1, opacity: 1 }}
-      transition={{
-        type: "spring",
-        stiffness: 200,
-        damping: 9,
-        duration: 0.6,
-      }}
+      layout
+      initial={{ scale: 0.8, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      exit={{ scale: 0.8, opacity: 0 }}
+      transition={{ type: "spring" }}
       className="item"
+      onClick={props.removeTodo}
     >
       {props.text}
     </motion.li>
