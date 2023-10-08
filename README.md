@@ -1,27 +1,43 @@
-# React + TypeScript + Vite
+1. atoms file syntax
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+   ```ts
+   import { atom } from "recoil";
+   // importing atom from recoil
 
-Currently, two official plugins are available:
+   type TodoItem = {
+     name: string;
+     id: string;
+   };
+   // what a single todo must have
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+   interface TodoItems {
+     todos: Array<TodoItem>;
+   }
+   // this is an interface that will tell us the structure of TodoItems which will have a property in it called, todos which is an Array of the above metioned TodoItem
 
-## Expanding the ESLint configuration
+   const defaultTodoItems: TodoItems = {
+     todos: [],
+   };
+   // here, we define the default value for our todoState which initially is [] but will eventually have items added to it
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+   export const todoState = atom<TodoItems>({
+     default: defaultTodoItems,
+     key: "todos",
+   });
+   // this is the state that we will be exporting throughout our entire app, we mention the state's default value and also provide a key for uniqueness
+   ```
 
-- Configure the top-level `parserOptions` property like this:
+   - we also need to wrap the entire app inside of a <RecoilRoot> which is very similar to how we'd wrap the app in Global Context
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+2. usage of custom hooks
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- usage of hooks breaks down operations into simpler chunks of files which are re-usable throughout our application while grouping similar functionalities within certain files for usage. For example: user hooks, authentication hooks, count hooks, etc.
+- returns an object which contain references to the functions that can be destructured in our application as required.
+
+3. recoil functions
+
+- we have 3 functions we'll ever need
+
+1. getter & setter - useRecoilState(the atom that is to be read & modified)
+2. getter - useRecoilValue(the atom that is to be read)
+3. setter - useSetRecoilState(the atom that is to be modified)

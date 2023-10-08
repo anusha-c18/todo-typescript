@@ -1,11 +1,14 @@
+import React from "react";
 import useOperations from "../hooks/useOperations";
 import "./TodoItem.css";
 import { motion } from "framer-motion";
+import { TodoItem } from "../atoms/todoAtom";
 
-const TodoItem: React.FC<{
-  id: string;
-  text: string;
-}> = ({ text, id }) => {
+type TodoItemProps = {
+  todo: TodoItem;
+};
+
+const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
   const { removeTodoHandler } = useOperations();
   return (
     <motion.li
@@ -15,11 +18,10 @@ const TodoItem: React.FC<{
       exit={{ scale: 0.8, opacity: 0 }}
       transition={{ type: "spring" }}
       className="item"
-      onClick={() => removeTodoHandler(id)}
+      onClick={() => removeTodoHandler(todo.id)}
     >
-      {text}
+      {todo.name}
     </motion.li>
   );
 };
-
 export default TodoItem;

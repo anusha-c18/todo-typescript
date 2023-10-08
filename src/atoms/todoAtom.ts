@@ -1,6 +1,6 @@
 import { atom } from "recoil";
 
-type TodoItem = {
+export type TodoItem = {
   name: string;
   id: string;
 };
