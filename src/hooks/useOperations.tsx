@@ -3,6 +3,7 @@ import { useSetRecoilState } from "recoil";
 
 const useOperations = () => {
   const setTodos = useSetRecoilState(todoState);
+
   const addTodoHandler = (todoText: string) => {
     setTodos((prev) => ({
       todos: [...prev.todos, { id: new Date().toISOString(), name: todoText }],

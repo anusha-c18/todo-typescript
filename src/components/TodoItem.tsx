@@ -8,7 +8,7 @@ type TodoItemProps = {
   todo: TodoItem;
 };
 
-const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
+const Todo: React.FC<TodoItemProps> = ({ todo }) => {
   const { removeTodoHandler } = useOperations();
   return (
     <motion.li
@@ -24,4 +24,4 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
     </motion.li>
   );
 };
-export default TodoItem;
+export default Todo;

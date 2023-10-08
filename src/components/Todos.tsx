@@ -1,5 +1,5 @@
 import React from "react";
-import TodoItem from "./TodoItem";
+import Todo from "./TodoItem";
 import "./Todos.css";
 import { AnimatePresence } from "framer-motion";
 import { todoState } from "../atoms/todoAtom";
@@ -11,10 +11,9 @@ const Todos: React.FC = () => {
     <ul className="todos">
       <AnimatePresence>
         {todoValues.todos.map((item) => (
-          <TodoItem key={item.id} todo={item} />
+          <Todo key={item.id} todo={item} />
         ))}
       </AnimatePresence>
-      {}
     </ul>
   );
 };
